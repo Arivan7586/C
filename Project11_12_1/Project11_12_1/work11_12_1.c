@@ -8,9 +8,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+void sign()
+{
+	int psw = 0;
+	int key = 123456;
+	int i = 0;
+	for (i = 0; i < 3; i++)
+	{
+		printf("ÇëÊäÈëÃÜÂë£º\n");
+		scanf("%d",&psw);
+		if (psw == key)
+		{
+			printf("ÃÜÂëÕýÈ·£¡\n");
+			break;
+		}
+		else
+		{
+			printf("ÃÜÂë´íÎó£¡\n");
+		}
+	}
+	if (psw != key && i == 3)
+	{
+		printf("Èý´ÎÃÜÂë´íÎó£¬³ÌÐòÒÑÍË³ö!\n");
+	}
+}
+
 int main()
 {
-	int password = 0;
+	sign();
+	/*int password = 0;
 	int key = 123456;
 	int i = 0;
 	printf("ÇëÊäÈëÁùÎ»ÊýµÄÃÜÂë£º");
@@ -30,7 +56,7 @@ int main()
 		{
 			printf("ÃÜÂë´íÎóÀÛ¼ÆÈý´Î£¬¼´½«ÍË³ö³ÌÐò£¡\n");
 		}
-	}
+	}*/
 	system("pause");
 	return 0;
 }
