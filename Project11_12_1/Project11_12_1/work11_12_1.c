@@ -10,14 +10,14 @@
 
 void sign()
 {
-	int psw = 0;
-	int key = 123456;
+	char psw[20] = {0};
+	char * key = "123456";
 	int i = 0;
 	for (i = 0; i < 3; i++)
 	{
 		printf("ÇëÊäÈëÃÜÂë£º\n");
-		scanf("%d",&psw);
-		if (psw == key)
+		scanf("%s",psw);
+		if (strcmp(key,psw) == 0)
 		{
 			printf("ÃÜÂëÕýÈ·£¡\n");
 			break;
@@ -27,7 +27,7 @@ void sign()
 			printf("ÃÜÂë´íÎó£¡\n");
 		}
 	}
-	if (psw != key && i == 3)
+	if (strcmp(key, psw)!= 0 && i == 3)
 	{
 		printf("Èý´ÎÃÜÂë´íÎó£¬³ÌÐòÒÑÍË³ö!\n");
 	}
