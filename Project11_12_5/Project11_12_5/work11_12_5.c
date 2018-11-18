@@ -7,7 +7,7 @@
 
 int panduan(int *n)
 {
-	if ((0 == *n%4 && 0 != *n%100) || (0 == *n%100))
+	if ((0 == *n%4 && 0 != *n%100) || (0 == *n%400))
 	{
 		return 1;
 	}
@@ -19,7 +19,7 @@ int panduan(int *n)
 
 int panduan1(int n)
 {
-	if ((0 == n % 4 && 0 != n % 100) || (0 == n % 100))
+	if ((0 == n % 4 && 0 != n % 100) || (0 == n % 400))
 	{
 		return 1;
 	}
