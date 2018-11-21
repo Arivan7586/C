@@ -78,7 +78,7 @@ void computerRun(char board[ROW][COL],int row,int col)
 	{
 		x = rand() % row;
 		y = rand() % col;
-		if ((board[x][y] == ' ') && (board[x][y] != 'x'))
+		if (board[x][y] == ' ' && board[x][y] != 'x')
 		{
 			board[x][y] = '*';
 			break;
