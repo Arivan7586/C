@@ -67,38 +67,50 @@ void findMines(char mine[ROWS][COLS],char show[ROWS][COLS], int a, int b, char s
 	if (ret == 0)
 	{
 		show[a][b] = ' ';
-		if (show[a - 1][b] == '*' && a - 1 > 0)	//此处规定坐标不可越界
+		int i = 0;
+		int j = 0;
+		for (i = -1; i <= 1; i++)
 		{
-			findMines(mine, show, a - 1, b, set);
+			for (j = -1; j <= 1; j++)
+			{
+				if (show[a + i][b + j] == '*' && a + i > 0 && a + i <= ROW && b + j > 0 && b + j <= COL)  //此处规定坐标不可越界
+				{
+					findMines(mine, show, a + i, b + j, set);
+				}
+			}
 		}
-		if (show[a - 1][b - 1] == '*' && a - 1 > 0 && b - 1 > 0)
-		{
-			findMines(mine, show, a - 1, b - 1, set);
-		}
-		if (show[a][b - 1] == '*' && b - 1 > 0)
-		{
-			findMines(mine, show, a, b - 1, set);
-		}
-		if (show[a + 1][b - 1] == '*' && a + 1 <= ROW && b - 1 > 0)
-		{
-			findMines(mine, show, a + 1, b - 1, set);
-		}
-		if (show[a + 1][b] == '*' && a + 1 <= ROW)
-		{
-			findMines(mine, show, a + 1, b, set);
-		}
-		if (show[a + 1][b + 1] == '*' && a + 1 <= ROW && b + 1 <= COL)
-		{
-			findMines(mine, show, a + 1, b + 1, set);
-		}
-		if (show[a][b + 1] == '*' && b + 1 <= COL)
-		{
-			findMines(mine, show, a, b + 1, set);
-		}
-		if (show[a - 1][b + 1] == '*' && a - 1 > 0 && b + 1 <= COL)
-		{
-			findMines(mine, show, a - 1, b + 1, set);
-		}
+		//if (show[a - 1][b] == '*' && a - 1 > 0)	//此处规定坐标不可越界
+		//{
+		//	findMines(mine, show, a - 1, b, set);
+		//}
+		//if (show[a - 1][b - 1] == '*' && a - 1 > 0 && b - 1 > 0)
+		//{
+		//	findMines(mine, show, a - 1, b - 1, set);
+		//}
+		//if (show[a][b - 1] == '*' && b - 1 > 0)
+		//{
+		//	findMines(mine, show, a, b - 1, set);
+		//}
+		//if (show[a + 1][b - 1] == '*' && a + 1 <= ROW && b - 1 > 0)
+		//{
+		//	findMines(mine, show, a + 1, b - 1, set);
+		//}
+		//if (show[a + 1][b] == '*' && a + 1 <= ROW)
+		//{
+		//	findMines(mine, show, a + 1, b, set);
+		//}
+		//if (show[a + 1][b + 1] == '*' && a + 1 <= ROW && b + 1 <= COL)
+		//{
+		//	findMines(mine, show, a + 1, b + 1, set);
+		//}
+		//if (show[a][b + 1] == '*' && b + 1 <= COL)
+		//{
+		//	findMines(mine, show, a, b + 1, set);
+		//}
+		//if (show[a - 1][b + 1] == '*' && a - 1 > 0 && b + 1 <= COL)
+		//{
+		//	findMines(mine, show, a - 1, b + 1, set);
+		//}
 	}
 	else
 	{
@@ -108,7 +120,7 @@ void findMines(char mine[ROWS][COLS],char show[ROWS][COLS], int a, int b, char s
 
 void playerGo(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, char set)
 {
-	int round = 0;
+	int round = 1; //round表示坐标输入次数
 	int a = 0;
 	int b = 0;
 	while (1)    //当排除的坐标等于 9 * 9 - 10 个的时候，排雷成功
@@ -118,7 +130,7 @@ void playerGo(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, ch
 		printf("\n");
 		if (a >= 1 && a <= 9 && b >= 1 && b <= 9 && show[a][b] == '*')   
 		{
-			if (mine[a][b] == set && round == 0)  //如果第一次输入的坐标就有一颗雷 ，就挪走这个雷
+			if (mine[a][b] == set && round == 1)  //如果第一次输入的坐标就有一颗雷 ，就挪走这个雷
 			{
 				mine[a][b] = '0';
 				putInMines(mine, row, col, set, 1); //重新放置一个雷
@@ -126,7 +138,7 @@ void playerGo(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, ch
 				findMines(mine, show, a, b, set); //set 代表雷  此函数用于查找坐标（a，b）周围八个坐标中雷的情况
 				disPlayBoard(show, row, col);
 			}
-			else if (mine[a][b] == set && round != 0)
+			else if (mine[a][b] == set && round != 1)
 			{
 				printf("很遗憾，你踩雷了！\n");
 				round++;
@@ -144,7 +156,7 @@ void playerGo(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, ch
 			int i = 0;
 			int j = 0;
 			int win = 0;
-			for (i = 1; i <= ROW; i++)
+			for (i = 1; i <= ROW; i++)  //每次输入坐标之后，都要进行一次 符号* 数量的统计
 			{
 				for (j = 1; j <= COL; j++)
 				{
@@ -154,7 +166,7 @@ void playerGo(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col, ch
 					}
 				}
 			}
-			if (win <= NUM)
+			if (win <= NUM) //如果最后剩下 NUM 个坐标没有排除，就成功排除所有雷
 			{
 				printf("恭喜你，排雷成功！\n");
 				break;

@@ -24,7 +24,6 @@ void play()
 	putInMines(mine, ROW, COL, '1', NUM); //此函是用于放置雷 字符 1 表示雷 
 	disPlayBoard(mine, ROW, COL);  
 
-
 	playerGo(mine, show, ROW, COL, '1');  //开始排雷
 }
 
