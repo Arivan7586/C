@@ -36,7 +36,12 @@ void displayboard(char board[ROW][COL],int row,int col)
 		printf("\n");
 		if (i < row - 1)
 		{
-			printf("--- --- ---\n");
+			int a = 0;
+			for (a = 0; a < row; a++)
+			{
+				printf("--- ");
+			}
+			printf("\n");
 		}
 	}
 }
@@ -130,7 +135,7 @@ char judgement(char board[ROW][COL], int row, int col)
 	{
 		return board[row - 2][col - 2];
 	}
-	else if (board[row - 1][col - 3] == board[row - 2][col - 2] &&
+	if (board[row - 1][col - 3] == board[row - 2][col - 2] &&
 			board[row - 2][col - 2] == board[row - 3][col - 1] &&
 			board[row - 3][col - 1] != ' ')
 	{
