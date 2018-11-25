@@ -76,35 +76,53 @@
 //			student a am i
 //			i ma a tneduts
 //			i am a student
-void exchange(char * a, char * b)
+void reverse1(char arr[], int m, int n)
 {
-	char c = 0;
-	c = *a;
-	*a = *b;
-	*b = c;
+	int left = m;
+	int right = n;
+	while (left < right)
+	{
+		char tem = 0;
+		tem = arr[left];
+		arr[left] = arr[right];
+		arr[right] = tem;
+		left++;
+		right--;
+	}
+}
+
+void reverse2(char arr[], int n)
+{
+	int left = 0;
+	int right = 0;
+	right = n - 1;
+	int i = 0;
+	while (i <= n - 1)
+	{
+		if (arr[i] != ' ')
+		{
+			left = i;
+			while (arr[i] && arr[i] != ' ')
+			{
+				i++;
+			}
+			right = i - 1;
+		}
+		reverse1(arr, left, right);
+		i++;
+	}
 }
 
 int main()
 {
 	char arr[] = "student a am i";
+	printf("%s\n",arr);
 	int size = 0;
-	int i = 0;
 	size = sizeof(arr) / sizeof(arr[0]) - 1;
-	printf("%c", *(arr+size-1));
-	printf("\n");
-	for (i = 0; i <= size; i++)
-	{
-		if (arr[i] == arr[size - i])
-		{
-			break;
-		}
-		exchange(&arr[i], &arr[size - i]);  //Ö·´«µİ
-	}
-	for (i = 1; i <= size; i++) 
-	{
-		printf("%c ",arr[i]);  
-	}
-	printf("\n");
+	reverse1(arr,0,size - 1);
+	printf("%s\n", arr);
+	reverse2(arr, size);
+	printf("%s\n", arr);
 	system("pause");
 	return 0;
 }
